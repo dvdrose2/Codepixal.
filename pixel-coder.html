@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Coder | Coding for Schools</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #030814;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(3, 8, 20, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 195, 255, 0.25);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #00c8ff;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #d8f7ff;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #b23cff;
+    }
+
+    .nav-btn {
+      background: linear-gradient(135deg, #00c8ff, #8b35ff);
+      padding: 10px 18px;
+      border-radius: 999px;
+      color: #fff !important;
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #00c8ff;
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      align-items: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 24px;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .hero-text h1 span {
+      color: #00c8ff;
+      text-shadow: 0 0 30px rgba(0, 200, 255, 0.6);
+    }
+
+    .hero-text p {
+      color: #c9d7e8;
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00c8ff, #8b35ff);
+      box-shadow: 0 0 28px rgba(0, 200, 255, 0.45);
+    }
+
+    .btn-secondary {
+      border: 1px solid #00c8ff;
+      color: #00c8ff;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-image {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 200, 255, 0.4);
+      box-shadow: 0 0 45px rgba(0, 200, 255, 0.25);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero-image img {
+      width: 100%;
+      display: block;
+    }
+
+    section {
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #00c8ff;
+      margin-bottom: 14px;
+    }
+
+    .section-title p {
+      color: #c9d7e8;
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(12,25,50,0.95), rgba(5,11,25,0.95));
+      border: 1px solid rgba(0, 200, 255, 0.22);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      color: #ffffff;
+      margin-bottom: 14px;
+      font-size: 1.35rem;
+    }
+
+    .card p {
+      color: #c9d7e8;
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+      margin-bottom: 20px;
+      border: 1px solid currentColor;
+    }
+
+    .blue { color: #00c8ff; }
+    .purple { color: #b23cff; }
+    .green { color: #00e087; }
+    .orange { color: #ff7a18; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(178,60,255,0.25);
+      border-radius: 22px;
+      padding: 34px;
+    }
+
+    .panel h2 {
+      color: #00c8ff;
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+    }
+
+    .panel p {
+      color: #c9d7e8;
+      margin-bottom: 18px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .feature-list li {
+      background: rgba(0,200,255,0.07);
+      border-left: 4px solid #00c8ff;
+      padding: 14px 16px;
+      border-radius: 10px;
+      color: #e8faff;
+    }
+
+    .comparison {
+      background: radial-gradient(circle at top, rgba(0,200,255,0.14), transparent 45%),
+                  #030814;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .compare-box {
+      border-radius: 22px;
+      padding: 34px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .compare-box.highlight {
+      border-color: rgba(0,200,255,0.55);
+      box-shadow: 0 0 35px rgba(0,200,255,0.2);
+    }
+
+    .compare-box h3 {
+      margin-bottom: 18px;
+      color: #ffffff;
+    }
+
+    .compare-box ul {
+      padding-left: 20px;
+      color: #c9d7e8;
+    }
+
+    .compare-box li {
+      margin-bottom: 12px;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0,200,255,0.16), rgba(178,60,255,0.16));
+      border-top: 1px solid rgba(0,200,255,0.25);
+      border-bottom: 1px solid rgba(178,60,255,0.25);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      margin-bottom: 18px;
+    }
+
+    .cta p {
+      color: #c9d7e8;
+      max-width: 760px;
+      margin: 0 auto 30px;
+    }
+
+    footer {
+      padding: 30px 24px;
+      text-align: center;
+      color: #b7c7d8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer span {
+      color: #00c8ff;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #050b19;
+        flex-direction: column;
+        padding: 24px;
+        display: none;
+        border-bottom: 1px solid rgba(0,200,255,0.3);
+      }
+
+      #menu-toggle:checked ~ .nav-links {
+        display: flex;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">PIXEL <span>CODER</span></a>
+
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="hamburger">☰</label>
+
+      <div class="nav-links">
+        <a href="#schools">For Schools</a>
+        <a href="#students">For Students</a>
+        <a href="#difference">Why Different</a>
+        <a href="#demo" class="nav-btn">Request Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Teach Coding With a Program Students Actually <span>Want to Use</span></h1>
+      <p>
+        Pixel Coder gives schools a modern, visual, hands-on way to teach HTML,
+        CSS, JavaScript, and web design fundamentals. Students do not just watch
+        coding lessons — they build real pages, solve challenges, and see their
+        work come alive instantly.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#schools" class="btn btn-primary">See School Benefits</a>
+        <a href="#difference" class="btn btn-secondary">How It's Different</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <!-- Replace this image path with your uploaded hero image -->
+      <img src="pixel-coder-hero.png" alt="Pixel Coder learning program hero image">
+    </div>
+  </header>
+
+  <section id="schools">
+    <div class="container">
+      <div class="section-title">
+        <h2>Built for Schools</h2>
+        <p>
+          Pixel Coder helps teachers introduce coding in a way that feels visual,
+          structured, and less intimidating for beginners.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon blue">&lt;/&gt;</div>
+          <h3>Easy Classroom Integration</h3>
+          <p>
+            Teachers can use Pixel Coder as a coding lab, enrichment tool,
+            after-school program, or web design curriculum companion.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon purple">⚡</div>
+          <h3>Less Setup, More Learning</h3>
+          <p>
+            Students can begin practicing web development concepts quickly
+            without complicated development environments.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon green">✓</div>
+          <h3>Real-Time Feedback</h3>
+          <p>
+            Students immediately see what their code changes do, helping them
+            understand cause and effect faster.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="students">
+    <div class="container split">
+      <div class="panel">
+        <h2>Why Students Benefit</h2>
+        <p>
+          Many students struggle with coding because traditional programs feel
+          too abstract. Pixel Coder gives them visual results, interactive
+          challenges, and creative freedom.
+        </p>
+        <p>
+          Instead of only memorizing syntax, students learn by building actual
+          web pages and seeing how HTML, CSS, and JavaScript work together.
+        </p>
+      </div>
+
+      <ul class="feature-list">
+        <li>Hands-on coding practice with live visual results.</li>
+        <li>Helps students understand layout, structure, and design.</li>
+        <li>Encourages creativity while teaching real technical skills.</li>
+        <li>Great for beginners, homeschoolers, schools, and coding clubs.</li>
+        <li>Turns web development into something students can explore.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="difference" class="comparison">
+    <div class="container">
+      <div class="section-title">
+        <h2>How Pixel Coder Is Different</h2>
+        <p>
+          Most coding programs either feel too much like a game or too much like
+          a dry textbook. Pixel Coder is designed to bridge that gap.
+        </p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-box">
+          <h3>Typical School Coding Tools</h3>
+          <ul>
+            <li>Often focus mostly on puzzles or isolated exercises.</li>
+            <li>Students may not understand how coding applies to real websites.</li>
+            <li>Can feel disconnected from design and creativity.</li>
+            <li>Advanced setup can discourage beginners.</li>
+          </ul>
+        </div>
+
+        <div class="compare-box highlight">
+          <h3>Pixel Coder</h3>
+          <ul>
+            <li>Students build real web pages with real HTML, CSS, and JavaScript.</li>
+            <li>Visual editor helps students understand what their code creates.</li>
+            <li>Encourages creativity, design thinking, and problem solving.</li>
+            <li>Designed to make coding practical, exciting, and approachable.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="cta">
+    <div class="container">
+      <h2>Ready to Bring Pixel Coder to Your School?</h2>
+      <p>
+        Request a demo and see how Pixel Coder can fit into your classroom,
+        coding club, or curriculum. No commitment required.
+      </p>
+      <a href="mailto:demo@pixelcoder.com" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 <span>Pixel Coder</span>. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
